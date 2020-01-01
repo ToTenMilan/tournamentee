@@ -1,0 +1,10 @@
+- if tournament
+  = form_for tournament, class: 'form-group' do |f|
+    = render 'shared/error_messages', object: f.object
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+    - Team.all.each do |team|
+      = check_box_tag "tournament[team_ids][]", team.id
+      = team.name
+      %br
+    = f.submit 'Start'

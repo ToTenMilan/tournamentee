@@ -1,0 +1,28 @@
+%table.table.table-light
+  %thead
+    %tr
+      %td Game name
+      %td Level
+      %td A division
+      %td B division
+      %td Result
+      %td host team total points
+      %td guest team total points
+      %td host team total goals
+      %td guest team total goals
+  %tbody
+    - @tournament.games.send(playoff_level).each do |game|
+      
+      %tr
+        -# %td= pp game.inspect ######### debug
+        %td= game.name
+        %td= game.playoff_level
+        -# %td= game.host_team.inspect
+        %td= game.host_team.name
+        %td= game.guest_team.name
+        %td= show_results(game)
+        %td= game.host_team.tournament_entries.where("tournament_id = #{@tournament.id}").first.total_points
+        %td= game.guest_team.tournament_entries.where("tournament_id = #{@tournament.id}").first.total_points
+        %td= game.host_team.tournament_entries.where("tournament_id = #{@tournament.id}").first.total_goals
+        %td= game.guest_team.tournament_entries.where("tournament_id = #{@tournament.id}").first.total_goals
+

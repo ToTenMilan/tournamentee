@@ -1,0 +1,4 @@
+{
+  "ruby.rubocop.configFilePath": ".rubocop.yml",
+  "ruby.rubocop.executePath": "/home/milan/workspace/codest/task/tournamentee/"
+}

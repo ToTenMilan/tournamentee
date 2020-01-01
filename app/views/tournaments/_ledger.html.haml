@@ -1,0 +1,12 @@
+%table.table.table-light
+  %thead
+    %tr
+      %td Position
+      %td Team name
+      %td Total points
+  %tbody
+    - @tournament.teams.where("tournament_entries.division = #{division}").each_with_index do |team, index|
+      %tr
+        %td= index + 1
+        %td= team.name
+        %td= team.tournament_entries.find_by(tournament_id: @tournament.id).total_points

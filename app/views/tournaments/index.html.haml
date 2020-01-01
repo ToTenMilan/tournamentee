@@ -1,0 +1,30 @@
+.col-md-12
+
+  %h1 Tournaments index
+  - if @tournaments
+    %table.table.table-striped
+      %thead
+        %tr
+          %td Name
+          %td Status
+          %td Winner
+          %td Final Host
+          %td Final Guest
+      %tbody
+        - @tournaments.each do |t|
+          %tr
+            %td= link_to t.name, tournament_path(t)
+            %td= t.status
+            %td
+            %td
+            %td
+  - else
+    %p There are no tournaments
+
+  %br
+  %h2 Add new tournament
+  = render 'new', tournament: @tournament
+  
+  %br
+  %h2 Create New team
+  = link_to 'Create new team', new_team_path, class: 'btn btn-primary'

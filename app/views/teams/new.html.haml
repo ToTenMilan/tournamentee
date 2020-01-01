@@ -1,0 +1,8 @@
+.col-md-12
+  %h2 Create New team
+  = form_for @team, class: 'form-group' do |f|
+    = render 'shared/error_messages', object: f.object
+    %p
+      = f.label :name
+      = f.text_field :name, class: 'form-control'
+    %p= f.submit 'Create new team'

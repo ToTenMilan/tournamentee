@@ -1,0 +1,2 @@
+module Tournaments::FinalResultsHelper
+end

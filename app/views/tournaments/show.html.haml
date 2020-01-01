@@ -1,0 +1,43 @@
+.col-md-12
+  %h1= @tournament.name
+
+  - if @tournament.playoff_level >= 3
+    The winner is: IMPLEMENT_ME
+
+  %p Plyaoff level: (ONLY FOR DEBUG)
+  %p= @tournament.playoff_level
+
+  - if @tournament.playoff_level >= 3
+    %h2 Finals
+    = generate_final_results_button
+    = render 'playoff_table', playoff_level: :final
+    %hr
+  
+  - if @tournament.playoff_level >= 2
+    %h2 Semifinals
+    = generate_semifinal_results_button
+    = render 'playoff_table', playoff_level: :semifinal
+    %hr
+  
+  - if @tournament.playoff_level >= 1
+    %h2 Quarterfinals
+    = generate_quarterfinal_results_button
+    = render 'playoff_table', playoff_level: :quarterfinal
+    %hr
+
+  %h2 Regular Season
+  = generate_season_results_button
+
+  %h4 Division A ledger
+  = render 'ledger', division: 0
+  
+  %h4 Division A results
+  = render 'division', division_number: 0
+
+  %h4 Division B ledger
+  = render 'ledger', division: 1
+  
+  %h4 Division B results
+  = render 'division', division_number: 1
+
+  = link_to 'Go to tournaments', tournaments_path, class: 'btn btn-primary'

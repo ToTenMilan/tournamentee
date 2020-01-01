@@ -1,0 +1,2 @@
+module Tournaments::SemifinalResultsHelper
+end

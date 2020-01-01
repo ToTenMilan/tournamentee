@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Tournamentee
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      .navbar-brand= link_to 'TOURNAMENTEE', root_path
+
+    .container
+      - flash.each do |msg_type, msg|
+        = content_tag :div, msg, class: "alert alert-#{msg_type}"
+      = yield
+    = debug(params) if Rails.env.development?
+
+  

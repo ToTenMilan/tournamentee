@@ -1,0 +1,16 @@
+%table.table.table-light
+  %thead
+    %tr
+      %td Game name
+      %td Level
+      %td A division
+      %td B division
+      %td Result
+  %tbody
+    - @tournament.games.quarterfinal.each do |game|
+      %tr
+        %td= game.name
+        %td= game.playoff_level
+        %td= game.host_team.name
+        %td= game.guest_team.name
+        %td= show_results(game)
