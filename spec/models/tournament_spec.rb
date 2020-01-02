@@ -3,21 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Tournament, type: :model do
-  # it 'should have its attributes' do
-  #   tournament = build(:tournament)
-  #   expect(tournament.name).to be_present
-  #   expect(tournament.status).to eq 'draft'
-  # end
-
-  # context 'relationships' do
-  #   it 'should have its relationships' do
-  #     tournament = create(:tournament_with_games_light)
-  #     expect(tournament.games.size).to be 8
-  #     expect(tournament.host_teams.size).to be 8
-  #     expect(tournament.guest_teams.size).to be 8
-  #   end
-  # end
-
   context 'ordering teams' do
     let(:tournament) { create(:tournament_with_games_light) }
     it 'should order host_teams by name' do

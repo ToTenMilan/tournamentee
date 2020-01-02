@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TournamentsHelper
   def game_fill_for_guest_team(guest_team, division_number, opponent_position)
     game = @tournament.game_for(guest_team, division_number, opponent_position)

@@ -42,13 +42,4 @@ class Tournament < ApplicationRecord
     games.map { |game| game.read_attribute_before_type_cast(:playoff_level) }.max ||
       0
   end
-
-  # ???????
-  def playoff_winners(playoff_level)
-    games.send(playoff_level).map(&:winner)
-  end
-
-  # def playoff_games(playoff_level)
-  #   games.send
-  # end
 end

@@ -25,10 +25,8 @@ class Tournament
 
     private
 
-    # may be optimized
     def divide_teams(tournament, teams, division)
       teams.each do |outer_team|
-        # divide_teams to divisions and create games
         teams.each_with_index do |inner_team, index|
           tournament.games.create(host_team_id: outer_team.id, guest_team_id: inner_team.id) do |g|
             g.division = division
@@ -36,14 +34,8 @@ class Tournament
             g.game_type = outer_team.id != inner_team.id ? :seasonal : :seasonal_self_assigned
           end
         end
-        
-        # initialize ledger positions
         outer_team.tournament_entries.find_or_create_by(tournament_id: tournament.id, division: division)
       end
     end
-
-    # def pop_random_team
-    #   @teams.delete_at(rand(@teams.length)).id
-    # end
   end
 end

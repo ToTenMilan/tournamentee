@@ -1,2 +1,0 @@
-module Tournaments::QuarterfinalResultsHelper
-end

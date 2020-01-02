@@ -15,8 +15,6 @@ def generate_games(tournament, teams, division)
 end
 
 def generate_results_for_season_games(tournament)
-  # results = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,3,4,4,5,6,7,8,9]
-  # rs = results.size
   tournament.games.each_with_index do |game, index|
     next if game.host_team_id === game.guest_team_id
     game.update(host_team_result: 2, guest_team_result: index)
