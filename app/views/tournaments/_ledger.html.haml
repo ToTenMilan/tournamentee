@@ -5,7 +5,7 @@
       %td Team name
       %td Total points
   %tbody
-    - @tournament.teams.where("tournament_entries.division = #{division}").each_with_index do |team, index|
+    - @tournament.teams.where("tournament_entries.division = ?", division).each_with_index do |team, index|
       %tr
         %td= index + 1
         %td= team.name

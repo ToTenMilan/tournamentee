@@ -18,6 +18,7 @@ class Tournament
         end
         game.update(host_team_result: host_team_result, guest_team_result: guest_team_result)
       end
+      @tournament.update(status: :done) if @playoff_level == :final
       @tournament
     end
   end

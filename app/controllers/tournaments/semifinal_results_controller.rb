@@ -12,5 +12,5 @@ module Tournaments
         redirect_to tournament_path(@tournament)
       end
     end
-  end  
+  end
 end

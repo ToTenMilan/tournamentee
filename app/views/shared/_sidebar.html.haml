@@ -1,0 +1,4 @@
+%b Other tournaments
+- Tournament.all.each do |t|
+  %ul
+    %li{ style: 'list-style-type: none' }= link_to(t.name, tournament_path(t))

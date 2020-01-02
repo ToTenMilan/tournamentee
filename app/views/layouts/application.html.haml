@@ -10,11 +10,12 @@
   %body
     %nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .navbar-brand= link_to 'TOURNAMENTEE', root_path
+    .row.justify-content-md-center
+      .col-8
+        - flash.each do |msg_type, msg|
+          = content_tag :div, msg, class: "alert alert-#{msg_type}"
+        = yield
+      .col-2{style: 'background-color: #eee;'}
+        = render 'shared/sidebar'
 
-    .container
-      - flash.each do |msg_type, msg|
-        = content_tag :div, msg, class: "alert alert-#{msg_type}"
-      = yield
     = debug(params) if Rails.env.development?
-
-  

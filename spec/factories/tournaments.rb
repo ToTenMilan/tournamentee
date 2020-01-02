@@ -28,15 +28,6 @@ FactoryBot.define do
     end
   end
 
-  factory :tournament_with_games_with_season_results, parent: :tournament do
-    after(:create) do |tournament, _evaluator|
-      teams = create_list(:team, 4)
-      generate_games(tournament, teams[0, 2], :a)
-      generate_games(tournament, teams[2, 3], :b)
-      generate_results_for_season_games(tournament)
-    end
-  end
-
   factory :tournament_with_finished_season, parent: :tournament do
     transient do
       teams_count { 8 }
@@ -52,30 +43,35 @@ FactoryBot.define do
     end
   end
 
+  factory :tournament_with_games_with_season_results, parent: :tournament do
+    after(:create) do |tournament, _evaluator|
+      teams = create_list(:team, 4)
+      generate_games(tournament, teams[0, 2], :a)
+      generate_games(tournament, teams[2, 3], :b)
+      generate_results_for_season_games(tournament)
+    end
+  end
+
+  factory :tournament_with_playoff_games_generated, parent: :tournament do
+    transient do
+      games_needed { nil }
+      playoff_level { nil }
+    end
+    after(:create) do |tournament, evaluator|
+      teams = create_list(:team, 8)
+      evaluator.games_needed.times do |n|
+        tournament.games.create(host_team_id: teams[n * 2].id,
+                                guest_team_id: teams[n * 2 + 1].id,
+                                playoff_level: evaluator.playoff_level,
+                                game_type: :playoff)
+      end
+    end
+  end
+
+
   factory :tournament_with_finished_quarterfinal, parent: :tournament do
     after(:create) do |tournament, evaluator|
       teams = create_list(:team, 8)
-      # tournament.teams << teams
-      # tournament.games.create(host_team_id: teams[0].id, 0 * 2
-      #                         guest_team_id: teams[1].id, 0 * 2 + 1
-      #                         playoff_level: :quarterfinal,
-      #                         game_type: :playoff,
-      #                         name: "Game #{1}")
-      # tournament.games.create(host_team_id: teams[2].id,
-      #                         guest_team_id: teams[3].id, 1 * 2 + 1
-      #                         playoff_level: :quarterfinal,
-      #                         game_type: :playoff,
-      #                         name: "Game #{2}")
-      # tournament.games.create(host_team_id: teams[4].id,
-      #                         guest_team_id: teams[5].id, 2 * 2 + 1
-      #                         playoff_level: :quarterfinal,
-      #                         game_type: :playoff,
-      #                         name: "Game #{3}")
-      # tournament.games.create(host_team_id: teams[6].id,
-      #                         guest_team_id: teams[7].id, 3 * 2 + 1
-      #                         playoff_level: :quarterfinal,
-      #                         game_type: :playoff,
-      #                         name: "Game #{4}")
       4.times do |n|
         tournament.games.create(host_team_id: teams[n * 2].id,
           guest_team_id: teams[n * 2 + 1].id,

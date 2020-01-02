@@ -13,7 +13,6 @@ class Game < ApplicationRecord
   enum division: [:a, :b]
 
   def winner
-    pp self
     if host_team_result > guest_team_result
       host_team
     elsif host_team_result < guest_team_result

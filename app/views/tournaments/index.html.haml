@@ -13,11 +13,11 @@
       %tbody
         - @tournaments.each do |t|
           %tr
-            %td= link_to t.name, tournament_path(t)
+            %td= link_to(t.name, tournament_path(t))
             %td= t.status
-            %td
-            %td
-            %td
+            %td= show_winner(t)
+            %td= show_finalist(t, :host_team)
+            %td= show_finalist(t, :guest_team)
   - else
     %p There are no tournaments
 
@@ -27,4 +27,4 @@
   
   %br
   %h2 Create New team
-  = link_to 'Create new team', new_team_path, class: 'btn btn-primary'
+  = link_to('Create new team', new_team_path, class: 'btn btn-primary')

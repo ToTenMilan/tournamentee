@@ -36,7 +36,7 @@ class Tournament
     end
 
     def create_games_for_quarterfinal_round
-      div_a_entries = @tournament.tournament_entries.where('division = 0')#.order('total_points DESC') 
+      div_a_entries = @tournament.tournament_entries.where('division = 0')
       div_b_entries = @tournament.tournament_entries.where('division = 1')
       4.times do |n|
         # (a's are host teams, b's are guest teams)
@@ -56,10 +56,7 @@ class Tournament
     end
 
     def find_winner_id_of(game_name)
-      # playoff_level here is always one too much
       previous_level = Game.playoff_levels.key(Game.playoff_levels[@playoff_level].pred)
-      lld '===============================prevvelel', previous_level
-      lld 'query', @tournament.games.send(previous_level).inspect
       @tournament.games.send(previous_level).find_by(name: game_name).winner.id
     end
   end

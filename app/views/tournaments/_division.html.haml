@@ -1,5 +1,6 @@
 %table.table.table-dark
   %thead.thead-dark
+    -# for each game(matrix cell) host is the top, guest is on the left
     %tr
       %td Host : Guest
       - @tournament.teams_by_division(division_number).each do |host_team| # host teams vertically
@@ -11,7 +12,6 @@
       %tr
         %td= guest_team.name
         - 8.times do |opponent_position|
-          -# %td= @tournament.game_fill_for_guest_team(team, division_number, opponent_position)
-          %td= game_fill_for_guest_team(guest_team, division_number, opponent_position)
-        %td teamGamesStub
-        %td teamWinsStub
+          %td= game_fill_for_guest_team(@tournament, guest_team, division_number, opponent_position)
+        %td= guest_team.games_played(@tournament)
+        %td= guest_team.wins(@tournament)

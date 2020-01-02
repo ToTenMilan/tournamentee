@@ -27,19 +27,27 @@ class Tournament < ApplicationRecord
     super.order('total_points DESC, total_goals DESC')
   end
 
-  # these methods needs querying optimization
   def teams_by_division(division_number)
-    host_teams.where(host_games: games.where("division = #{division_number}"))
+    host_teams.where(host_games: games.where("division = ?", division_number))
   end
 
   def game_for(guest_team, division_number, opponent_position)
     games.find_by(guest_team_id: guest_team.id,
                   host_team_id: host_teams.where(host_games: games
-                                          .where("division = #{division_number}"))[opponent_position])
+                                          .where("division = ?", division_number))[opponent_position])
   end
 
   def playoff_level
     games.map { |game| game.read_attribute_before_type_cast(:playoff_level) }.max ||
       0
+  end
+
+  def finals_finished?
+    final = games.final.first
+    final && final.host_team_result && final.guest_team_result
+  end
+
+  def winner
+    games.final.first.winner
   end
 end
